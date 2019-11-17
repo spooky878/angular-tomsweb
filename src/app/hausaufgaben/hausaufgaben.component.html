@@ -1,0 +1,80 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Titel</th>
+        <th>Fach</th>
+        <th>Termin</th>
+        <th>Erledigt</th>
+        <th>Bemerkungen</th>
+        <th>Löschen</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let aufgabe of aufgaben">
+        <td>
+            {{aufgabe.titel}}
+        </td>
+        <td>
+            {{aufgabe.fach.name}}
+        </td>
+        <td>{{aufgabe.termin | date:'dd.MM.yyyy'}}</td>
+        <td>
+            <input type="checkbox" class="form-check-input" value="" [(ngModel)]="aufgabe.erledigt"
+                   (change)="speichereAufgabe(aufgabe)">
+        </td>
+        <td>{{aufgabe.bemerkung}}</td>
+        <td>
+            <button class="btn btn-danger btn-sm" (click)="loescheAufgabe(aufgabe)">
+                <i class="fa fa-trash fa-sm"></i>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<ngb-accordion [closeOthers]="true" activeIds="static-1">
+    <ngb-panel id="static-1" title="Hausaufgaben">
+        <ng-template ngbPanelContent>
+            <div class="container row">
+                <label class="col-3" for="name">Titel</label>
+                <input type="text" class="form-control col-6" id="name"
+                       [(ngModel)]="neueAufgabe.titel" name="name">
+                <div class="col-1"></div>
+            </div>
+            <br>
+
+            <div class="container row">
+                <label class="col-3" for="name">Fach</label>
+                <select [(ngModel)]="neueAufgabe.fach">
+                    <option *ngFor="let fach of faecher" [value]="fach.id">{{fach.name}}</option>
+                </select>
+            </div>
+            <br>
+
+            <div class="container row">
+                <label class="col-3" for="name">Termin</label>
+                <div class="col-8 input-group" style="padding-left: 0">
+                    <input class="form-control"
+                           name="dp" [(ngModel)]="neueAufgabe.termin" ngbDatepicker #d="ngbDatepicker">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+            <div class="container row">
+                <label class="col-3" for="name">Bemerkumg</label>
+                <input type="text" class="form-control col-6" id="bemerkumgen"
+                       [(ngModel)]="neueAufgabe.bemerkung" name="bemerkung">
+            </div>
+            <br>
+            <br>
+
+            <div class="container row">
+                <label class="col-3" for="name"></label>
+                <button type="button" class="col-2 btn btn-success" (click)="hinzufuegenAufgabe()">Hinzufügen</button>
+            </div>
+        </ng-template>
+    </ngb-panel>
+</ngb-accordion>

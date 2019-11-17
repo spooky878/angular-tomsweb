@@ -1,0 +1,42 @@
+<hr>
+<div class="card">
+    <div class="card-header">Liste aller Fächer</div>
+    <div class="card-body">
+        <div class="grid grid-pad">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Fach</th>
+                    <th>Löschen</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let fach of faecher">
+                    <td>
+                        {{fach.name}}
+                    </td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" (click)="loescheFach(fach)">
+                            <i class="fa fa-trash fa-sm"></i>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="container row">
+            <label class="col-3" for="name">Neues Fach</label>
+            <input type="text" class="form-control col-6" id="name"
+                   [(ngModel)]="neuesFach.name" name="name">
+            <button type="button" class="col-2 btn btn-success" (click)="hinzufuegenFach()">Hinzufügen</button>
+
+            <div class="col-1"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
